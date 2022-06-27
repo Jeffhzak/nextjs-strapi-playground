@@ -72,6 +72,12 @@
       ],
       "type": "media",
       "multiple": false
+    },
+    "threads": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::thread.thread",
+      "mappedBy": "users_permissions_user"
     }
   }
 }
