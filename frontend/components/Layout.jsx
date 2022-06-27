@@ -1,6 +1,6 @@
 import Head from "next/head"
 import { useEffect } from "react";
-import { getUserFromCookies } from "../lib/auth";
+import { getIdFromCookies, getTokenFromCookies, getUserFromCookies } from "../lib/auth";
 import { useUser } from "../lib/store";
 import Nav from "./Nav";
 
@@ -12,8 +12,14 @@ const Layout = ({title = "Strapi App", children}) => {
     let isMounted = true;
     
     const gotUser = getUserFromCookies();
+    const gotId = getIdFromCookies();
+    const gotToken = getTokenFromCookies();
     if (isMounted) {
-      if (gotUser) setUser(gotUser); 
+      if (gotUser) setUser({
+        id: gotId,
+        username: gotUser,
+        token: gotToken,
+      }); 
       else setUser(null);
     }
   

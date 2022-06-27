@@ -3,6 +3,7 @@ import nookies from "nookies";
 
 export const setToken = (data, ctx = null) => {
   if (typeof window === "undefined") return
+  console.log("setToken")
   nookies.set(ctx, "id", data.user.id);
   nookies.set(ctx, "username", data.user.username);
   nookies.set(ctx, "jwt", data.jwt);
@@ -13,7 +14,8 @@ export const setToken = (data, ctx = null) => {
 
 export const unsetToken = (ctx = null) => {
   if (typeof window === "undefined") return
-  
+  console.log("unsetToken")
+
   nookies.destroy(ctx, "id");
   nookies.destroy(ctx, "username");
   nookies.destroy(ctx, "jwt");

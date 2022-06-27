@@ -4,6 +4,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { setToken, unsetToken } from '../lib/auth';
 import { useUser } from '../lib/store';
+import Router from 'next/router';
 
 
 const Nav = () => {
@@ -24,7 +25,7 @@ const Nav = () => {
     '>
       <div>
         <Link href="/" passHref>
-          <a>test</a>
+          <a>TEST</a>
         </Link>
       </div>
       <div id="menu">
@@ -62,7 +63,8 @@ const Nav = () => {
                 async (values, {setSubmitting}) => {
                 try {
                   const res = await axios.post(`${process.env.NEXT_PUBLIC_STRAPI_URL}/auth/local`, values);
-                  // console.log(res.data);
+                  console.log("🚀 ~ res", res)
+                  
                   setToken(res.data);
                   setSubmitting(false);
                 } catch (error) {
@@ -82,6 +84,7 @@ const Nav = () => {
                     <ErrorMessage name="password" component="div" className="text-xs text-red-500 px-2 absolute pointer-events-none opacity-70" />
                     </div>
                     <button type="submit" disabled={isSubmitting} className={`btn-primary ${isSubmitting ? "bg-gray-400" : ""}`}>Login</button>
+                    <button type="button" onClick={() => Router.push("/users/signup")} disabled={isSubmitting} className={`btn-primary ${isSubmitting ? "bg-gray-400" : ""}`}>Sign Up</button>
                     {/* <button disabled={isSubmitting} onClick={() => setShowLogin(false)} className={`btn-primary ${isSubmitting ? "bg-gray-400" : ""}`}>Close</button> */}
                   </Form>
                 )
